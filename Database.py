@@ -48,8 +48,11 @@ def get_entries_count(_id:ObjectId):
     return access_log_col.count_documents({ "user_id": _id })
 
 def get_user_by_card(card_id:int):
+    print(f"get_user_by_card(card_id:{str(card_id)})")
     if users_col is None: return False
+    print("\treturn False : User Col Null")
     user = users_col.find_one({"card_id": str(card_id)})
+    print(f"\treturn {user}")
     return user
 
 def get_users_by_card(card_id:int):
