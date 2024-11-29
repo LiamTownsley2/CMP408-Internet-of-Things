@@ -14,6 +14,7 @@ def connect_to_database():
         database = client["cmp408"]
         users_col = database["users"]
         access_log_col = database["access-log"]
+        return True
 
     except Exception as e:
         print(f"Exception occured whilst connecting to MongoDB: {e}")

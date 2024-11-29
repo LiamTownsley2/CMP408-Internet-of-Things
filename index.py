@@ -8,7 +8,8 @@ from bson.objectid import ObjectId
 import Encryptor
 
 Util.initialise_gpio_pins()
-DB.connect_to_database()
+is_connected = DB.connect_to_database()
+print("MOGNODB CONNECTED" if is_connected else "MONGODB NOT CONNECTED")
 rfid_reader = RFID_Reader()
 
 def validate_key(user, text):
