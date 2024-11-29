@@ -11,7 +11,7 @@ access_log_col = None
 def connect_to_database():
     global client, database, users_col, access_log_col
     try:
-        client = pymongo.MongoClient()
+        client = pymongo.MongoClient("mongodb://localhost:27017")
         database = client["cmp408"]
         users_col = database["users"]
         access_log_col = database["access-log"]
