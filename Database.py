@@ -50,7 +50,7 @@ def get_entries_count(_id:ObjectId):
 def get_user_by_card(card_id:int):
     print(f"get_user_by_card(card_id:{str(card_id)})")
     # if users_col is None: return False
-    # print("\treturn False : User Col Null")
+    print("\tusers_col : {users_col}")
     user = users_col.find_one({"card_id": str(card_id)})
     print(f"\treturn {user}")
     return user
