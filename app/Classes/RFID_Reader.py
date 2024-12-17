@@ -1,12 +1,11 @@
 import sys
 from mfrc522 import SimpleMFRC522
 import multiprocessing
-from AWS import db
-import Util.general
-from Classes.GPIO_Pin import GPIO_Pin
+from aws import db
+import util.general
+from app.classes.DoorControl import door_controller
 
 sys.path.append("..")
-
 
 class RFID_Reader:
     def __init__(self, logger, camera):
@@ -22,7 +21,7 @@ class RFID_Reader:
     def read_key(self):
         self.logger.info("RFID Reader is awaiting Key Presentation")
         id, text = self.reader.read()
-        filtered_text = Util.general.clean_text(text)
+        filtered_text = util.general.clean_text(text)
         return id, filtered_text
 
     def validate_key(user, text):
@@ -73,10 +72,7 @@ class RFID_Reader:
                     self.logger.info(
                         f"This employee has entered this building {entries} time(s) before."
                     )
-                    green_led = GPIO_Pin(
-                        12
-                    )  # The Green LED represents unlocking the door.
-                    green_led.enable(3)
+                    door_controller.unlock(3)
                 else:
                     self.camera.record_and_upload(5)
 
